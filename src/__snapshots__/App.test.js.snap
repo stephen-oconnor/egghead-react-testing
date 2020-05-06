@@ -46,6 +46,31 @@ exports[`<App /> mount rendering matches the snapshot 1`] = `
         Three
       </li>
     </ul>
+    <p
+      className="button-state"
+    >
+      No!
+    </p>
+    <button
+      onClick={[Function]}
+    >
+      Click
+    </button>
+    <h2 />
+    <input
+      onChange={[Function]}
+      type="text"
+    />
+    <h3
+      className="blue"
+    >
+      Yo
+    </h3>
+    <p
+      className="lifeCycle"
+    >
+      componentDidMount
+    </p>
   </header>
   <Test />
 </div>
@@ -97,6 +122,31 @@ exports[`<App /> shallow rendering matches the snapshot 1`] = `
         Three
       </li>
     </ul>
+    <p
+      className="button-state"
+    >
+      No!
+    </p>
+    <button
+      onClick={[Function]}
+    >
+      Click
+    </button>
+    <h2 />
+    <input
+      onChange={[Function]}
+      type="text"
+    />
+    <h3
+      className="blue"
+    >
+      Yo
+    </h3>
+    <p
+      className="lifeCycle"
+    >
+      componentDidMount
+    </p>
   </header>
   <Test />
 </div>

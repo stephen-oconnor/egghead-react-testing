@@ -10,10 +10,7 @@ configure({ adapter: new Adapter() });
 // Wrap tests in a describe block. <App />
 describe("<App /> shallow rendering", () => {
 	// shallow is used to test individual components, doesn't care about child components.
-	const wrapper = shallow(<App />, {
-		context: {},
-		disableLifecycleMethods: true,
-	});
+	const wrapper = shallow(<App />);
 
 	// Individual test(s).
 	it("should render App", () => {
@@ -59,6 +56,46 @@ describe("<App /> shallow rendering", () => {
 	it("matches the snapshot", () => {
 		const tree = shallow(<App />);
 		expect(toJson(tree)).toMatchSnapshot();
+	});
+
+	// Simulate button click.
+	it("on button click changes p text", () => {
+		const button = wrapper.find("button");
+		expect(wrapper.find(".button-state").text()).toBe("No!");
+		// Get the onClick prop and call the function associated.
+		button.simulate("click");
+		expect(wrapper.find(".button-state").text()).toBe("Yes!");
+	});
+
+	// Simulate input change.
+	it("on input change, title changes text", () => {
+		const input = wrapper.find("input");
+		expect(wrapper.find("h2").text()).toBe("");
+		// Get the onChange props and call the function associated. Pass in optional event Object.
+		input.simulate("change", { currentTarget: { value: "Stephen" } });
+		expect(wrapper.find("h2").text()).toBe("Stephen");
+	});
+
+	// Check for state updates.
+	it("updates className with new state", () => {
+		expect(wrapper.find(".blue").length).toBe(1);
+		expect(wrapper.find(".red").length).toBe(0);
+		wrapper.setState({ mainColor: "red" });
+		expect(wrapper.find(".red").length).toBe(1);
+		expect(wrapper.find(".blue").length).toBe(0);
+	});
+
+	// Check lifecycle methods.
+	it("calls componentDidMount, updates p tag", () => {
+		expect(wrapper.find(".lifeCycle").text()).toBe("componentDidMount");
+	});
+
+	// Check function call return.
+	it("handleStrings function returns correctly", () => {
+		const trueReturn = wrapper.instance().handleStrings("Hello World");
+		const falseReturn = wrapper.instance().handleStrings("");
+		expect(trueReturn).toBe(true);
+		expect(falseReturn).toBe(false);
 	});
 });
 
